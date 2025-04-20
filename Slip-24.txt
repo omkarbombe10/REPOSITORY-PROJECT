@@ -1,0 +1,60 @@
+Q1. Write a java program to implement Fibonacci series recursive using functions.
+import java.util.Scanner;
+public class AB {
+public static void main(String[] args) {
+Scanner scanner = new Scanner(System.in);
+System.out.print("Enter the number of terms for the Fibonacci series: ");
+int n = scanner.nextInt();
+int first = 0, second = 1;
+System.out.print("Fibonacci Series: ");
+for (int i = 0; i < n; i++) {
+System.out.print(first + " ");
+int next = first + second;
+first = second;
+second = next;
+}
+scanner.close();
+}
+}
+Q2. Write a program in Java to implement Strassen?s Matrix multiplication (2X2 Matrix)
+public class Srassensmat2by2 {
+public static void main(String[] args) {
+int[][] X = {
+{2, 3},
+{4, 7}
+};
+int[][] Y = {
+{1, 2},
+{3, 4}
+};
+int[][] Z = strassenMultiply(X, Y);
+System.out.println("Resultant Matrix Z (using Strassen's method):");
+for (int i = 0; i < 2; i++) {
+for (int j = 0; j < 2; j++) {
+System.out.print(Z[i][j] + " ");
+}
+System.out.println();
+}
+}
+public static int[][] strassenMultiply(int[][] X, int[][] Y) {
+int[][] Z = new int[2][2];
+int A = X[0][0], B = X[0][1], C = X[1][0], D = X[1][1];
+int E = Y[0][0], F = Y[0][1], G = Y[1][0], H = Y[1][1];
+int P1 = A * (F - H);
+int P2 = H * (A + B);
+int P3 = E * (C + D);
+int P4 = D * (G - E);
+int P5 = (A + D) * (E + H);
+int P6 = (B - D) * (G + H);
+int P7 = (A - C) * (E + F);
+
+
+Z[0][0] = P5 + P4 - P2 + P6;
+Z[0][1] = P1 + P2;
+Z[1][0] = P3 + P4;
+Z[1][1] = P5 + P1 - P3 - P7;
+return Z;
+}
+}
+
+

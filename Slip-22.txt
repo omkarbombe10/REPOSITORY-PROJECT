@@ -1,0 +1,86 @@
+Q1. Write a program to implement BFS (Breadth First Search) and determine the time complexity for the same.
+import java.util.*;
+class AB {
+private int V;
+private List<Integer>[] adjList;
+AB(int vertices) {
+V = vertices;
+adjList = new ArrayList[vertices];
+for (int i = 0; i < vertices; i++) {
+adjList[i] = new ArrayList<>();
+}
+}
+void addEdge(int v, int w) {
+adjList[v].add(w);
+}
+void BFS(int start) {
+boolean[] visited = new boolean[V];
+Queue<Integer> queue = new LinkedList<>();
+visited[start] = true;
+queue.offer(start);
+while (!queue.isEmpty()) {
+int node = queue.poll();
+System.out.print(node + " ");
+for (int neighbor : adjList[node]) {
+if (!visited[neighbor]) {
+visited[neighbor] = true;
+queue.offer(neighbor);
+}
+}
+}
+}
+public static void main(String[] args) {
+AB g = new AB(5);
+g.addEdge(0, 1);
+g.addEdge(0, 2);
+g.addEdge(1, 3);
+g.addEdge(1, 4);
+g.addEdge(2, 4);
+System.out.println("BFS traversal starting from vertex 0:");
+g.BFS(0);
+}
+}
+Q2. Write programs in Java to sort a list of n numbers in ascending order using Quick Sort and determine its time complexity.
+import java.util.Scanner;
+public class KnapsackProblem {
+public static void quickSort(int[] arr, int low, int high) {
+if (low < high) {
+int pi = partition(arr, low, high);
+quickSort(arr, low, pi - 1);
+quickSort(arr, pi + 1, high);
+}
+}
+public static int partition(int[] arr, int low, int high) {
+int pivot = arr[high];
+int i = (low - 1);
+for (int j = low; j < high; j++) {
+if (arr[j] <= pivot) {
+i++;
+int temp = arr[i];
+arr[i] = arr[j];
+arr[j] = temp;
+}
+}
+int temp = arr[i + 1];
+arr[i + 1] = arr[high];
+arr[high] = temp;
+return i + 1;
+}
+public static void main(String[] args) {
+Scanner scanner = new Scanner(System.in);
+System.out.print("Enter number of elements: ");
+int n = scanner.nextInt();
+int[] arr = new int[n];
+System.out.println("Enter the elements:");
+for (int i = 0; i < n; i++) {
+arr[i] = scanner.nextInt();
+}
+quickSort(arr, 0, n - 1);
+System.out.println("Sorted array in ascending order:");
+for (int num : arr) {
+System.out.print(num + " ");
+}
+scanner.close();
+}
+}
+

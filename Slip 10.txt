@@ -1,0 +1,79 @@
+Q1. Write a program to find LCM of 2 numbers using functions.
+import java.util.Scanner;
+public class LCMCalculator {
+public static int lcm(int a, int b) {
+int max = Math.max(a, b);
+while (true) {
+if (max % a == 0 && max % b == 0) {
+return max;
+}
+max++;
+}
+}
+public static void main(String[] args) {
+try (Scanner scanner = new Scanner(System.in)) {
+System.out.print("Enter the first number: ");
+int num1 = scanner.nextInt();
+System.out.print("Enter the second number: ");
+int num2 = scanner.nextInt();
+System.out.println("LCM of " + num1 + " and " + num2 + " is: " + lcm(num1, num2));
+}
+}
+}
+
+Q2. Write Java Program to implement Fractional Knapsack Problem using greedy by Profit.
+import java.util.*;
+class Item {
+int profit, weight;
+public Item() {
+profit = 0;
+weight = 0;
+}
+public Item(int profit, int weight) {
+this.profit = profit;
+this.weight = weight;
+}
+public double getProfitPerWeight() {
+return (double) profit / weight;
+}
+}
+public class KnapsackProblem {
+public static double genMaxProfit(Item[] items, double capacity) {
+Arrays.sort(items, new Comparator<Item>() {
+public int compare(Item a, Item b) {
+return Double.compare(b.getProfitPerWeight(), a.getProfitPerWeight());
+}
+});
+
+double totalProfit = 0;
+for (Item item : items) {
+if (capacity >= item.weight) {
+totalProfit += item.profit;
+capacity -= item.weight;
+} else if (capacity > 0) {
+totalProfit += item.profit * (capacity / item.weight);
+break;
+} else {
+break;
+}
+}
+return totalProfit;
+}
+public static void main(String[] args) {
+double capacity = 23;
+Item[] items = {
+new Item(19, 6),
+new Item(15, 5),
+new Item(5, 4),
+new Item(7, 3),
+new Item(7, 2),
+new Item(11, 5),
+new Item(2, 1),
+
+};
+
+double totalProfit = genMaxProfit(items, capacity);
+System.out.println("Total profit: " + totalProfit);
+}
+}
+

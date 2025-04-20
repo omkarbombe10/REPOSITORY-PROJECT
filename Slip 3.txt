@@ -1,0 +1,73 @@
+Q1. Write a program to read an array from the user and find maximum and minimum numbers using the function
+import java.util.Scanner;
+public class A {
+public static void main(String[] args) {
+try (Scanner scanner = new Scanner(System.in)) {
+System.out.print("Enter the size of the array: ");
+int size = scanner.nextInt();
+int[] array = new int[size];
+System.out.println("Enter the elements of the array:");
+for (int i = 0; i < size; i++) {
+array[i] = scanner.nextInt();
+}
+int max = array[0];
+int min = array[0];
+for (int i = 1; i < size; i++) {
+if (array[i] > max) {
+max = array[i];
+}
+if (array[i] < min) {
+min = array[i];
+}
+}
+System.out.println("Maximum number: " + max);
+System.out.println("Minimum number: " + min);
+}
+}
+}
+Q2. Write programs in Java to sort a list of n numbers in ascending order using selection sort and determine its time complexity (best case, worst case, average case) .
+import java.util.Scanner;
+public class binary {
+public static void selectionSort(int[] arr) {
+int n = arr.length;
+for (int i = 0; i < n - 1; i++) {
+int minIndex = i;
+for (int j = i + 1; j < n; j++) {
+if (arr[j] < arr[minIndex]) {
+minIndex = j;
+}
+}
+int temp = arr[minIndex];
+arr[minIndex] = arr[i];
+arr[i] = temp;
+}
+}
+
+public static void analyzeTimeComplexity(int[] arr) {
+System.out.println("Best Case Time Complexity: O(n^2)");
+System.out.println("Worst Case Time Complexity: O(n^2)");
+System.out.println("Average Case Time Complexity: O(n^2)");
+}
+public static void main(String[] args) {
+Scanner scanner = new Scanner(System.in);
+System.out.print("Enter the number of elements: ");
+int n = scanner.nextInt();
+int[] arr = new int[n];
+System.out.println("Enter the elements:");
+for (int i = 0; i < n; i++) {
+arr[i] = scanner.nextInt();
+}
+System.out.println("Original Array: ");
+for (int num : arr) {
+System.out.print(num + " ");
+}
+System.out.println();
+selectionSort(arr);
+System.out.println("Sorted Array: ");
+for (int num : arr) {
+System.out.print(num + " ");
+}
+System.out.println();
+analyzeTimeComplexity(arr);
+}
+}

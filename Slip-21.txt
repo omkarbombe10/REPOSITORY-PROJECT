@@ -1,0 +1,116 @@
+Q1. Write a program to perform  Addition using functions.
+import java.util.Scanner;
+public class AB {
+public static void readMatrix(int[][] matrix, Scanner scanner) {
+for (int i = 0; i < matrix.length; i++) {
+for (int j = 0; j < matrix[0].length; j++) {
+System.out.print("Enter element [" + i + "][" + j + "]: ");
+matrix[i][j] = scanner.nextInt();
+}
+}
+}
+public static int[][] addMatrices(int[][] matrix1, int[][] matrix2) {
+int rows = matrix1.length;
+int cols = matrix1[0].length;
+int[][] result = new int[rows][cols];
+for (int i = 0; i < rows; i++) {
+for (int j = 0; j < cols; j++) {
+result[i][j] = matrix1[i][j] + matrix2[i][j];
+}
+}
+return result;
+}
+public static void displayMatrix(int[][] matrix) {
+System.out.println("Matrix:");
+for (int[] row : matrix) {
+for (int value : row) {
+System.out.print(value + "\t");
+}
+System.out.println();
+}
+}
+public static void main(String[] args) {
+Scanner scanner = new Scanner(System.in);
+System.out.print("Enter number of rows: ");
+int rows = scanner.nextInt();
+System.out.print("Enter number of columns: ");
+int cols = scanner.nextInt();
+int[][] matrix1 = new int[rows][cols];
+int[][] matrix2 = new int[rows][cols];
+System.out.println("Enter elements for Matrix 1:");
+readMatrix(matrix1, scanner);
+System.out.println("Enter elements for Matrix 2:");
+readMatrix(matrix2, scanner);
+int[][] result = addMatrices(matrix1, matrix2);
+System.out.println("Result of Matrix Addition:");
+displayMatrix(result);
+}
+}
+
+Q2. Write programs in Java to sort a list of n numbers in ascending order using Merge Sort and determine its time complexity (best case, worst case, average case).
+import java.util.Arrays;
+import java.util.Random;
+public class MergeSort {
+public static void mergeSort(int[] array) {
+if (array.length < 2) {
+return;
+}
+
+int mid = array.length / 2;
+int[] left = Arrays.copyOfRange(array, 0, mid);
+int[] right = Arrays.copyOfRange(array, mid, array.length);
+mergeSort(left);
+mergeSort(right);
+merge(array, left, right);
+}
+public static void merge(int[] array, int[] left, int[] right) {
+int i = 0, j = 0, k = 0;
+while (i < left.length && j < right.length) {
+if (left[i] <= right[j]) {
+array[k++] = left[i++];
+} else {
+array[k++] = right[j++];
+}
+}
+while (i < left.length) {
+array[k++] = left[i++];
+}
+while (j < right.length) {
+array[k++] = right[j++];
+}
+}
+public static void main(String[] args) {
+int[] bestCaseArray = {3, 9, 10, 27, 38, 43, 82};
+int[] worstCaseArray = {82, 43, 38, 27, 10, 9, 3};
+Random random = new Random();
+int n = 1000;
+int[] averageCaseArray = new int[n];
+for (int i = 0; i < n; i++) {
+averageCaseArray[i] = random.nextInt(1000);
+}
+long startTime, endTime, duration;
+System.out.println("Best Case - Already Sorted Array:");
+startTime = System.nanoTime();
+mergeSort(bestCaseArray);
+endTime = System.nanoTime();
+duration = endTime - startTime;
+System.out.println("Sorted array: " + Arrays.toString(bestCaseArray));
+System.out.println("Time taken to sort (in nanoseconds): " + duration);
+
+System.out.println("\nWorst Case - Reverse Sorted Array:");
+startTime = System.nanoTime();
+mergeSort(worstCaseArray);
+endTime = System.nanoTime();
+duration = endTime - startTime;
+System.out.println("Sorted array: " + Arrays.toString(worstCaseArray));
+System.out.println("Time taken to sort (in nanoseconds): " + duration);
+
+System.out.println("\nAverage Case - Random Array:");
+startTime = System.nanoTime();
+mergeSort(averageCaseArray);
+endTime = System.nanoTime();
+duration = endTime - startTime;
+System.out.println("Time taken to sort (in nanoseconds): " + duration);
+}
+}
+

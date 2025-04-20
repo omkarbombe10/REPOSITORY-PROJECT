@@ -1,0 +1,55 @@
+Q1. Write a program to read an array from the user and find maximum and minimum numbers using the function
+import java.util.Scanner;
+public class A {
+public static void main(String[] args) {
+try (Scanner scanner = new Scanner(System.in)) {
+System.out.print("Enter the size of the array: ");
+int size = scanner.nextInt();
+int[] array = new int[size];
+System.out.println("Enter the elements of the array:");
+for (int i = 0; i < size; i++) {
+array[i] = scanner.nextInt();
+}
+int max = array[0];
+int min = array[0];
+for (int i = 1; i < size; i++) {
+if (array[i] > max) {
+max = array[i];
+}
+if (array[i] < min) {
+min = array[i];
+}
+}
+System.out.println("Maximum number: " + max);
+System.out.println("Minimum number: " + min);
+}
+}
+}
+
+Q2. Write a Java Program to implement Optimal Merge Pattern
+import java.util.PriorityQueue;
+public class KnapsackProblem
+{
+public static int Optimal(int[] files) {
+PriorityQueue<Integer> FS = new PriorityQueue<>();
+for (int file : files) {
+FS.add(file);
+}
+int totalCost = 0;
+while (FS.size() > 1) {
+int x1 = FS.poll();
+int x2 = FS.poll();
+int LST = x1 + x2;
+totalCost += LST;
+FS.add(LST);
+}
+return totalCost;
+}
+
+public static void main(String[] args) {
+int[] files = {5,10,20,30,30};
+int cost = Optimal(files);
+System.out.println("The Answer: " + cost);
+}
+}
+

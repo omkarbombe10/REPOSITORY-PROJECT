@@ -1,0 +1,115 @@
+Q1. Write a program to perform matrix Multiplication using Iterative approach
+import java.util.Scanner;
+public class AB {
+public static void main(String[] args) {
+Scanner sc = new Scanner(System.in);
+System.out.print("Enter the number of rows for matrix A: ");
+int m = sc.nextInt();
+System.out.print("Enter the number of columns for matrix A: ");
+int n = sc.nextInt();
+int[][] A = new int[m][n];
+System.out.println("Enter elements for matrix A:");
+for (int i = 0; i < m; i++) {
+for (int j = 0; j < n; j++) {
+A[i][j] = sc.nextInt();
+}
+}
+System.out.print("Enter the number of rows for matrix B: ");
+int p = sc.nextInt();
+System.out.print("Enter the number of columns for matrix B: ");
+int q = sc.nextInt();
+if (n != p) {
+System.out.println("Matrix multiplication is not possible. The number of columns of A must be equal to the number of rows of B.");
+System.exit(0);
+}
+int[][] B = new int[p][q];
+System.out.println("Enter elements for matrix B:");
+for (int i = 0; i < p; i++) {
+for (int j = 0; j < q; j++) {
+B[i][j] = sc.nextInt();
+}
+}
+int[][] C = new int[m][q];
+for (int i = 0; i < m; i++) {
+for (int j = 0; j < q; j++) {
+for (int k = 0; k < n; k++) {
+C[i][j] += A[i][k] * B[k][j];
+}
+}
+}
+System.out.println("Resultant matrix C:");
+for (int i = 0; i < m; i++) {
+for (int j = 0; j < q; j++) {
+System.out.print(C[i][j] + " ");
+}
+System.out.println();
+}
+sc.close();
+}
+}
+Q2. Write programs in Java to sort a list of n numbers in ascending order using Merge Sort and determine its time complexity (best case, worst case, average case).
+import java.util.Arrays;
+import java.util.Random;
+public class MergeSort {
+public static void mergeSort(int[] array) {
+if (array.length < 2) {
+return;
+}
+
+int mid = array.length / 2;
+int[] left = Arrays.copyOfRange(array, 0, mid);
+int[] right = Arrays.copyOfRange(array, mid, array.length);
+mergeSort(left);
+mergeSort(right);
+merge(array, left, right);
+}
+public static void merge(int[] array, int[] left, int[] right) {
+int i = 0, j = 0, k = 0;
+while (i < left.length && j < right.length) {
+if (left[i] <= right[j]) {
+array[k++] = left[i++];
+} else {
+array[k++] = right[j++];
+}
+}
+while (i < left.length) {
+array[k++] = left[i++];
+}
+while (j < right.length) {
+array[k++] = right[j++];
+}
+}
+public static void main(String[] args) {
+int[] bestCaseArray = {3, 9, 10, 27, 38, 43, 82};
+int[] worstCaseArray = {82, 43, 38, 27, 10, 9, 3};
+Random random = new Random();
+int n = 1000;
+int[] averageCaseArray = new int[n];
+for (int i = 0; i < n; i++) {
+averageCaseArray[i] = random.nextInt(1000);
+}
+long startTime, endTime, duration;
+System.out.println("Best Case - Already Sorted Array:");
+startTime = System.nanoTime();
+mergeSort(bestCaseArray);
+endTime = System.nanoTime();
+duration = endTime - startTime;
+System.out.println("Sorted array: " + Arrays.toString(bestCaseArray));
+System.out.println("Time taken to sort (in nanoseconds): " + duration);
+
+System.out.println("\nWorst Case - Reverse Sorted Array:");
+startTime = System.nanoTime();
+mergeSort(worstCaseArray);
+endTime = System.nanoTime();
+duration = endTime - startTime;
+System.out.println("Sorted array: " + Arrays.toString(worstCaseArray));
+System.out.println("Time taken to sort (in nanoseconds): " + duration);
+System.out.println("\nAverage Case - Random Array:");
+startTime = System.nanoTime();
+mergeSort(averageCaseArray);
+endTime = System.nanoTime();
+duration = endTime - startTime;
+System.out.println("Time taken to sort (in nanoseconds): " + duration);
+}
+}
+

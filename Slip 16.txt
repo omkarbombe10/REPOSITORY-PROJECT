@@ -1,0 +1,62 @@
+Q1. Write a java program to implement Fibonacci series recursive using functions.
+import java.util.Scanner;
+public class AB {
+public static void main(String[] args) {
+Scanner scanner = new Scanner(System.in);
+System.out.print("Enter the number of terms for the Fibonacci series: ");
+int n = scanner.nextInt();
+int first = 0, second = 1;
+System.out.print("Fibonacci Series: ");
+for (int i = 0; i < n; i++) {
+System.out.print(first + " ");
+int next = first + second;
+first = second;
+second = next;
+}
+scanner.close();
+}
+}
+Q2. Write a program to perform Linear Search using functions (read numbers from file) and determine its time complexity (best case, worst case, average case)
+import java.io.*;
+import java.util.*;
+public class LinearSearchFromFile {
+public static void main(String[] args) throws Exception {
+int[] numbers = readNumbersFromFile("numbers.txt");
+try (Scanner scanner = new Scanner(System.in)) {
+System.out.print("Enter number to search: ");
+int target = scanner.nextInt();
+int index = linearSearch(numbers, target);
+if (index != -1) {
+System.out.println("Number found at index: " + index);
+} else {
+System.out.println("Number not found.");
+}
+}
+}
+public static int[] readNumbersFromFile(String filename) throws Exception {
+List<Integer> list = new ArrayList<>();
+BufferedReader br = new BufferedReader(new FileReader(filename));
+String line;
+while ((line = br.readLine()) != null) {
+String[] tokens = line.split("\\s+");
+for (String token : tokens) {
+list.add(Integer.parseInt(token.trim()));
+}
+}
+br.close();
+int[] arr = new int[list.size()];
+for (int i = 0; i < list.size(); i++) {
+arr[i] = list.get(i);
+}
+return arr;
+}
+public static int linearSearch(int[] arr, int target) {
+for (int i = 0; i < arr.length; i++) {
+if (arr[i] == target) {
+return i;
+}
+}
+return -1;
+}
+}
+

@@ -1,0 +1,104 @@
+Q1. Write a program to perform matrix Multiplication using Iterative approach
+import java.util.Scanner;
+public class AB {
+public static void main(String[] args) {
+Scanner sc = new Scanner(System.in);
+System.out.print("Enter the number of rows for matrix A: ");
+int m = sc.nextInt();
+System.out.print("Enter the number of columns for matrix A: ");
+int n = sc.nextInt();
+int[][] A = new int[m][n];
+System.out.println("Enter elements for matrix A:");
+for (int i = 0; i < m; i++) {
+for (int j = 0; j < n; j++) {
+A[i][j] = sc.nextInt();
+}
+}
+System.out.print("Enter the number of rows for matrix B: ");
+int p = sc.nextInt();
+System.out.print("Enter the number of columns for matrix B: ");
+int q = sc.nextInt();
+if (n != p) {
+System.out.println("Matrix multiplication is not possible. The number of columns of A must be equal to the number of rows of B.");
+System.exit(0);
+}
+int[][] B = new int[p][q];
+System.out.println("Enter elements for matrix B:");
+for (int i = 0; i < p; i++) {
+for (int j = 0; j < q; j++) {
+B[i][j] = sc.nextInt();
+}
+}
+int[][] C = new int[m][q];
+for (int i = 0; i < m; i++) {
+for (int j = 0; j < q; j++) {
+for (int k = 0; k < n; k++) {
+C[i][j] += A[i][k] * B[k][j];
+}
+}
+}
+System.out.println("Resultant matrix C:");
+for (int i = 0; i < m; i++) {
+for (int j = 0; j < q; j++) {
+System.out.print(C[i][j] + " ");
+}
+System.out.println();
+}
+sc.close();
+}
+}
+Q2. Write Java Program to implement Fractional Knapsack Problem using greedy by Profit.
+import java.util.*;
+class Item {
+int profit, weight;
+public Item() {
+profit = 0;
+weight = 0;
+}
+public Item(int profit, int weight) {
+this.profit = profit;
+this.weight = weight;
+}
+public double getProfitPerWeight() {
+return (double) profit / weight;
+}
+}
+public class KnapsackProblem {
+public static double genMaxProfit(Item[] items, double capacity) {
+Arrays.sort(items, new Comparator<Item>() {
+public int compare(Item a, Item b) {
+return Double.compare(b.getProfitPerWeight(), a.getProfitPerWeight());
+}
+});
+
+double totalProfit = 0;
+for (Item item : items) {
+if (capacity >= item.weight) {
+totalProfit += item.profit;
+capacity -= item.weight;
+} else if (capacity > 0) {
+totalProfit += item.profit * (capacity / item.weight);
+break;
+} else {
+break;
+}
+}
+return totalProfit;
+}
+public static void main(String[] args) {
+double capacity = 23;
+Item[] items = {
+new Item(19, 6),
+new Item(15, 5),
+new Item(5, 4),
+new Item(7, 3),
+new Item(7, 2),
+new Item(11, 5),
+new Item(2, 1),
+};
+
+double totalProfit = genMaxProfit(items, capacity);
+System.out.println("Total profit: " + totalProfit);
+}
+}
+

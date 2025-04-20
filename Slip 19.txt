@@ -1,0 +1,92 @@
+Q1. Write a program to read a 3X3 matrix from the user and print its row, column and diagonal sum using functions .
+import java.util.Scanner;
+public class KnapsackProblem {
+public static void readMatrix(int[][] matrix, Scanner sc) {
+System.out.println("Enter the elements of the 3x3 matrix:");
+for (int i = 0; i < 3; i++) {
+for (int j = 0; j < 3; j++) {
+System.out.print("Element [" + (i+1) + "][" + (j+1) + "]: ");
+matrix[i][j] = sc.nextInt();
+}
+}
+}
+public static void rowSums(int[][] matrix) {
+System.out.println("\nRow sums:");
+for (int i = 0; i < 3; i++) {
+int sum = 0;
+for (int j = 0; j < 3; j++) {
+sum += matrix[i][j];
+}
+System.out.println("Sum of row " + (i+1) + " = " + sum);
+}
+}
+
+public static void columnSums(int[][] matrix) {
+System.out.println("\nColumn sums:");
+for (int j = 0; j < 3; j++) {
+int sum = 0;
+for (int i = 0; i < 3; i++) {
+sum += matrix[i][j];
+}
+System.out.println("Sum of column " + (j+1) + " = " + sum);
+}
+}
+public static void diagonalSums(int[][] matrix) {
+int mainDiagonal = 0, secondaryDiagonal = 0;
+for (int i = 0; i < 3; i++) {
+mainDiagonal += matrix[i][i];
+secondaryDiagonal += matrix[i][2 - i];
+}
+System.out.println("\nDiagonal sums:");
+System.out.println("Main diagonal sum = " + mainDiagonal);
+System.out.println("Secondary diagonal sum = " + secondaryDiagonal);
+}
+public static void main(String[] args) {
+Scanner sc = new Scanner(System.in);
+int[][] matrix = new int[3][3];
+readMatrix(matrix, sc);
+rowSums(matrix);
+columnSums(matrix);
+diagonalSums(matrix);
+sc.close();
+}
+}
+
+Q2. Write programs in Java to sort a list of n numbers in ascending order using Bubble Sort and determine its time complexity (best case, worst case, average case).
+import java.util.Arrays;
+public class binary {
+public static void bubbleSort(int[] arr) {
+int n = arr.length;
+boolean swapped;
+for (int i = 0; i < n - 1; i++) {
+swapped = false;
+for (int j = 0; j < n - i - 1; j++) {
+if (arr[j] > arr[j + 1]) {
+int temp = arr[j];
+arr[j] = arr[j + 1];
+arr[j + 1] = temp;
+swapped = true;
+}
+}
+if (!swapped) break;
+}
+}
+public static void main(String[] args) {
+int[] bestCaseArr = {1, 2, 3, 4, 5};
+int[] worstCaseArr = {5, 4, 3, 2, 1};
+int[] averageCaseArr = {64, 34, 25, 12, 22, 11, 90};
+System.out.println("Best Case (Already Sorted):");
+System.out.println("Original array: " + Arrays.toString(bestCaseArr));
+bubbleSort(bestCaseArr);
+System.out.println("Sorted array: " + Arrays.toString(bestCaseArr));
+System.out.println("\nWorst Case (Reverse Sorted):");
+System.out.println("Original array: " + Arrays.toString(worstCaseArr));
+bubbleSort(worstCaseArr);
+System.out.println("Sorted array: " + Arrays.toString(worstCaseArr));
+System.out.println("\nAverage Case (Random Order):");
+System.out.println("Original array: " + Arrays.toString(averageCaseArr));
+bubbleSort(averageCaseArr);
+System.out.println("Sorted array: " + Arrays.toString(averageCaseArr));
+}
+}
+

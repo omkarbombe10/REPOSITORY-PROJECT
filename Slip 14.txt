@@ -1,0 +1,81 @@
+Q1. Write a program to read an array from the user and find maximum and minimum numbers using the function
+import java.util.Scanner;
+public class A {
+public static void main(String[] args) {
+try (Scanner scanner = new Scanner(System.in)) {
+System.out.print("Enter the size of the array: ");
+int size = scanner.nextInt();
+int[] array = new int[size];
+System.out.println("Enter the elements of the array:");
+for (int i = 0; i < size; i++) {
+array[i] = scanner.nextInt();
+}
+int max = array[0];
+int min = array[0];
+for (int i = 1; i < size; i++) {
+if (array[i] > max) {
+max = array[i];
+}
+if (array[i] < min) {
+min = array[i];
+}
+}
+
+System.out.println("Maximum number: " + max);
+System.out.println("Minimum number: " + min);
+}
+}
+}
+
+
+Q2. Write a Java Program to implement Huffman Coding.
+import java.util.*;
+class HuffmanNode {
+int data;
+char c;
+HuffmanNode left;
+HuffmanNode right;
+}
+class MyComparator implements Comparator<HuffmanNode> {
+public int compare(HuffmanNode x, HuffmanNode y) {
+return x.data - y.data;
+}
+}
+public class KnapsackProblem  {
+public static void printCode(HuffmanNode root, String s) {
+if (root.left == null && root.right == null && Character.isLetter(root.c)) {
+System.out.println(root.c + ":" + s);
+return;
+}
+printCode(root.left, s + "0");
+printCode(root.right, s + "1");
+}
+public static void main(String[] args) {
+int n = 4;
+char[] charArray = { 'a', 'b', 'c', 'd' };
+int[] charfreq = { 5, 1, 6, 3 };
+PriorityQueue<HuffmanNode> q = new PriorityQueue<>(n, new MyComparator());
+for (int i = 0; i < n; i++) {
+HuffmanNode hn = new HuffmanNode();
+hn.c = charArray[i];
+hn.data = charfreq[i];
+hn.left = null;
+hn.right = null;
+q.add(hn);
+}
+HuffmanNode root = null;
+while (q.size() > 1) {
+HuffmanNode x = q.poll();
+HuffmanNode y = q.poll();
+HuffmanNode f = new HuffmanNode();
+f.data = x.data + y.data;
+f.c = '-';
+f.left = x;
+f.right = y;
+root = f;
+q.add(f);
+}
+printCode(root, "");
+}
+}
+

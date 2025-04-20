@@ -1,0 +1,75 @@
+Q1. Write a program to perform Linear Search using functions.
+import java.util.Scanner;
+public class A {
+public static int linearSearch(int[] arr, int target) {
+for (int i = 0; i < arr.length; i++) {
+if (arr[i] == target) {
+return i;
+}
+}
+return -1;
+}
+public static void main(String[] args) {
+Scanner scanner = new Scanner(System.in);
+System.out.print("Enter the number of elements in the array: ");
+int n = scanner.nextInt();
+int[] arr = new int[n];
+System.out.println("Enter the elements of the array:");
+for (int i = 0; i < n; i++) {
+arr[i] = scanner.nextInt();
+}
+System.out.print("Enter the target element to search for: ");
+int target = scanner.nextInt();
+int index = linearSearch(arr, target);
+if (index != -1) {
+System.out.println("Element found at index: " + index);
+} else {
+System.out.println("Element not found");
+}
+scanner.close();
+}
+}
+
+
+Q2. .Write Java Program to implement Fractional Knapsack Problem using greedy by Density
+import java.util.*;
+class Item {
+int profit, weight;
+public Item(int profit, int weight) {
+this.profit = profit;
+this.weight = weight;
+}
+public double getDensity() {
+return (double) profit / weight;
+}
+}
+public class FractionalKnapsack {
+public static double getMaxProfit(Item[] items, int capacity) {
+Arrays.sort(items, (a, b) -> Double.compare(b.getDensity(), a.getDensity()));
+double totalProfit = 0.0;
+int currentWeight = 0;
+for (Item item : items) {
+if (currentWeight + item.weight <= capacity) {
+totalProfit += item.profit;
+currentWeight += item.weight;
+} else {
+int remaining = capacity - currentWeight;
+totalProfit += item.getDensity() * remaining;
+break;
+}
+}
+return totalProfit;
+}
+public static void main(String[] args) {
+Item[] items = {
+new Item(60, 10),
+new Item(100, 20),
+new Item(120, 30)
+};
+int capacity = 50;
+double maxProfit = getMaxProfit(items, capacity);
+System.out.println("Maximum Profit = " + maxProfit);
+}
+}
+
+

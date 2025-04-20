@@ -1,0 +1,92 @@
+Q1. Write programs in Java to sort a list of n numbers in ascending order using selection sort. (Use Dynamically initialized array).
+import java.util.Scanner;
+public class App {
+public static void selectionSort(int[] arr) {
+int n = arr.length;
+for (int i = 0; i < n - 1; i++) {
+int minIndex = i;
+for (int j = i + 1; j < n; j++) {
+if (arr[j] < arr[minIndex]) {
+minIndex = j;
+}
+}
+int temp = arr[minIndex];
+arr[minIndex] = arr[i];
+arr[i] = temp;
+}
+}
+public static void main(String[] args) {
+Scanner scanner = new Scanner(System.in);
+
+System.out.print("Enter the number of elements: ");
+int n = scanner.nextInt();
+int[] arr = new int[n];
+System.out.println("Enter the elements:");
+for (int i = 0; i < n; i++) {
+arr[i] = scanner.nextInt();
+}
+selectionSort(arr);
+System.out.println("Sorted array in ascending order:");
+for (int i = 0; i < n; i++) {
+System.out.print(arr[i] + " ");
+}
+scanner.close();
+}
+}
+Q2. Write a program to perform Binary Search using functions (read numbers from file) and determine its time complexity (best case, worst case, average case).
+import java.io.*;
+import java.util.*;
+public class BinarySearchFromFile {
+public static int[] readNumbers(String filename) {
+try {
+Scanner fileScanner = new Scanner(new File(filename));
+List<Integer> list = new ArrayList<>();
+while (fileScanner.hasNextInt()) {
+list.add(fileScanner.nextInt());
+}fileScanner.close();
+int[] numbers = new int[list.size()];
+for (int i = 0; i < list.size(); i++) {
+numbers[i] = list.get(i);
+}
+return numbers;
+} catch (IOException e) {
+System.out.println("Error reading file: " + e.getMessage());
+return new int[0];
+}
+}
+public static int binarySearch(int[] arr, int target) {
+int low = 0, high = arr.length - 1;
+while (low <= high) {
+int mid = (low + high) / 2;
+if (arr[mid] == target) {
+return mid;
+} else if (arr[mid] < target) {
+low = mid + 1;
+} else {
+high = mid - 1;
+}
+}
+return -1;
+}
+public static void main(String[] args) {
+Scanner input = new Scanner(System.in);
+int[] numbers = readNumbers("numbers.txt");
+System.out.println("Numbers from file: " + Arrays.toString(numbers));
+System.out.print("Enter number to search: ");
+int target = input.nextInt();
+
+int index = binarySearch(numbers, target);
+if (index != -1) {
+System.out.println(target + " found at index " + index);
+} else {
+System.out.println(target + " not found in the list.");
+}
+System.out.println("\nTime Complexity of Binary Search:");
+System.out.println("Best Case: O(1)");
+System.out.println("Worst Case: O(log n)");
+System.out.println("Average Case: O(log n)");
+
+input.close();
+}
+}
+

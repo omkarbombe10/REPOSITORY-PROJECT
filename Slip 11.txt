@@ -1,0 +1,104 @@
+Q1. Write a program to perform matrix Addition using functions.
+import java.util.Scanner;
+public class AB {
+public static void readMatrix(int[][] matrix, Scanner scanner) {
+for (int i = 0; i < matrix.length; i++) {
+for (int j = 0; j < matrix[0].length; j++) {
+System.out.print("Enter element [" + i + "][" + j + "]: ");
+matrix[i][j] = scanner.nextInt();
+}
+}
+}
+public static int[][] addMatrices(int[][] matrix1, int[][] matrix2) {
+int rows = matrix1.length;
+int cols = matrix1[0].length;
+int[][] result = new int[rows][cols];
+for (int i = 0; i < rows; i++) {
+for (int j = 0; j < cols; j++) {
+result[i][j] = matrix1[i][j] + matrix2[i][j];
+}
+}
+return result;
+}
+public static void displayMatrix(int[][] matrix) {
+System.out.println("Matrix:");
+for (int[] row : matrix) {
+for (int value : row) {
+System.out.print(value + "\t");
+}
+System.out.println();
+}
+}
+public static void main(String[] args) {
+Scanner scanner = new Scanner(System.in);
+System.out.print("Enter number of rows: ");
+int rows = scanner.nextInt();
+System.out.print("Enter number of columns: ");
+int cols = scanner.nextInt();
+int[][] matrix1 = new int[rows][cols];
+int[][] matrix2 = new int[rows][cols];
+System.out.println("Enter elements for Matrix 1:");
+readMatrix(matrix1, scanner);
+System.out.println("Enter elements for Matrix 2:");
+readMatrix(matrix2, scanner);
+int[][] result = addMatrices(matrix1, matrix2);
+System.out.println("Result of Matrix Addition:");
+displayMatrix(result);
+}
+}
+
+Q2. Write Java Program to implement Fractional Knapsack Problem using greedy by Profit.
+import java.util.*;
+class Item {
+int profit, weight;
+public Item() {
+profit = 0;
+weight = 0;
+}
+public Item(int profit, int weight) {
+this.profit = profit;
+this.weight = weight;
+}
+public double getProfitPerWeight() {
+return (double) profit / weight;
+}
+}
+public class KnapsackProblem {
+public static double genMaxProfit(Item[] items, double capacity) {
+Arrays.sort(items, new Comparator<Item>() {
+public int compare(Item a, Item b) {
+return Double.compare(b.getProfitPerWeight(), a.getProfitPerWeight());
+}
+});
+
+double totalProfit = 0;
+for (Item item : items) {
+if (capacity >= item.weight) {
+totalProfit += item.profit;
+capacity -= item.weight;
+} else if (capacity > 0) {
+totalProfit += item.profit * (capacity / item.weight);
+break;
+} else {
+break;
+}
+}
+return totalProfit;
+}
+public static void main(String[] args) {
+double capacity = 23;
+Item[] items = {
+new Item(19, 6),
+new Item(15, 5),
+new Item(5, 4),
+new Item(7, 3),
+new Item(7, 2),
+new Item(11, 5),
+new Item(2, 1),
+};
+
+double totalProfit = genMaxProfit(items, capacity);
+System.out.println("Total profit: " + totalProfit);
+}
+}
+

@@ -1,0 +1,96 @@
+Q1. Write a program to perform matrix Addition using functions.
+import java.util.Scanner;
+public class AB {
+public static void readMatrix(int[][] matrix, Scanner scanner) {
+for (int i = 0; i < matrix.length; i++) {
+for (int j = 0; j < matrix[0].length; j++) {
+System.out.print("Enter element [" + i + "][" + j + "]: ");
+matrix[i][j] = scanner.nextInt();
+}
+}
+}
+public static int[][] addMatrices(int[][] matrix1, int[][] matrix2) {
+int rows = matrix1.length;
+int cols = matrix1[0].length;
+int[][] result = new int[rows][cols];
+for (int i = 0; i < rows; i++) {
+for (int j = 0; j < cols; j++) {
+result[i][j] = matrix1[i][j] + matrix2[i][j];
+}
+}
+return result;
+}
+public static void displayMatrix(int[][] matrix) {
+System.out.println("Matrix:");
+for (int[] row : matrix) {
+for (int value : row) {
+System.out.print(value + "\t");
+}
+System.out.println();
+}
+}
+public static void main(String[] args) {
+Scanner scanner = new Scanner(System.in);
+System.out.print("Enter number of rows: ");
+int rows = scanner.nextInt();
+System.out.print("Enter number of columns: ");
+int cols = scanner.nextInt();
+int[][] matrix1 = new int[rows][cols];
+int[][] matrix2 = new int[rows][cols];
+System.out.println("Enter elements for Matrix 1:");
+readMatrix(matrix1, scanner);
+System.out.println("Enter elements for Matrix 2:");
+readMatrix(matrix2, scanner);
+int[][] result = addMatrices(matrix1, matrix2);
+System.out.println("Result of Matrix Addition:");
+displayMatrix(result);
+}
+}
+
+Q2. Write programs in Java to sort a list of n numbers in ascending order using selection sort and determine its time complexity (best case, worst case, average case) .
+import java.util.Scanner;
+public class binary {
+public static void selectionSort(int[] arr) {
+int n = arr.length;
+for (int i = 0; i < n - 1; i++) {
+int minIndex = i;
+for (int j = i + 1; j < n; j++) {
+if (arr[j] < arr[minIndex]) {
+minIndex = j;
+}
+}
+int temp = arr[minIndex];
+arr[minIndex] = arr[i];
+arr[i] = temp;
+}
+}
+
+public static void analyzeTimeComplexity(int[] arr) {
+System.out.println("Best Case Time Complexity: O(n^2)");
+System.out.println("Worst Case Time Complexity: O(n^2)");
+System.out.println("Average Case Time Complexity: O(n^2)");
+}
+public static void main(String[] args) {
+Scanner scanner = new Scanner(System.in);
+System.out.print("Enter the number of elements: ");
+int n = scanner.nextInt();
+int[] arr = new int[n];
+System.out.println("Enter the elements:");
+for (int i = 0; i < n; i++) {
+arr[i] = scanner.nextInt();
+}
+System.out.println("Original Array: ");
+for (int num : arr) {
+System.out.print(num + " ");
+}
+System.out.println();
+selectionSort(arr);
+System.out.println("Sorted Array: ");
+for (int num : arr) {
+System.out.print(num + " ");
+}
+System.out.println();
+analyzeTimeComplexity(arr);
+}
+}
+
